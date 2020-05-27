@@ -1,46 +1,18 @@
 <p align="center">
-    <img src="/Images/Logo.png" alt="UniTween">
-</p>
-<h3 align="center" style="text-align:center;">
-  Tweens with zero coding in a fast and maintainable workflow
-</h3>
-<p align="center">
-		UniTween is a powerful open-source tween framework for Unity built using <a href="https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676">DOTween</a> and <a href="https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041">Odin Inspector</a>
+		This a custom version of UniTween. It is a powerful open-source tween framework for Unity built using <a href="https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676">DOTween</a> and <a href="https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041">Odin Inspector</a>
 	
-<p align="center"><i>Note: the project is currently being revitalized targeting 2018.4 (and 2019.3+ later)</i></p>
+<p align="center"><i>Note: the project is currently being revitalized targeting 2019.3</i></p>
 
 <hr>
 
-<p align="center">	
-	<a href="https://twitter.com/unitween_unity">
-		<img src="/Images/BtnTwitter.png" alt="Twitter">
-	</a>
-  <a href="https://github.com/sampaiodias/UniTween/wiki">
-		<img src="/Images/BtnWiki.png" alt="Wiki">
-	</a>	
-	<a href="https://github.com/sampaiodias/UniTween/tree/master/Releases">
-		<img src="/Images/BtnDownload.png" alt="Download">
-	</a>
-	<a href="https://github.com/sampaiodias/UniTween/wiki/Donate">
-		<img src="/Images/BtnDonate.png" alt="Donate">
-	</a>	
-</p>
-
-<img src="https://github.com/sampaiodias/UniTween/blob/master/Images/0.5.0%20Demo.gif?raw=true" width="870" height="510" />
-
-To see how it works, check the video demonstration clicking on the image below.
-[![VideoDemo](https://i.imgur.com/o5mHYgK.png)](https://g.redditmedia.com/9AE7zanHgRsB0xVy-1Dnh-9ooWvVQpSXYLhBk0luxOk.gif?fm=mp4&mp4-fragmented=false&s=14bf19bb2ad19f0c9c380e0abc10aeac)
-
 ## Requirements
-* [Unity](https://unity3d.com/get-unity/download/archive) version 2018.4.x (support for 2019 is coming soon). Older versions may work but were not tested.
+* [Unity](https://unity3d.com/get-unity/download/archive) version 2019.3.x. Older versions may work but were not tested.
 * [DOTween](https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676) (Free or Pro) version 1.1.640 or higher
 * [Odin - Inspector and Serializer](https://assetstore.unity.com/packages/tools/utilities/odin-inspector-and-serializer-89041) version 2.1.9.0 or higher
 * Optional ([Extensions](https://github.com/sampaiodias/UniTween/wiki/Extensions)): TextMesh Pro, Post-Processing Stack v2
 
 ## How To Install
-* Import DOTween to your project (version 1.1.640 or higher)
-* Import Odin - Inspector and Serializer to your project (version 2.1.9.0 or higher)
-* Download the latest .unitypackage file [from the Releases folder](https://github.com/sampaiodias/UniTween/tree/master/Releases) and open it on your project.
+TODO
 
 ## Components available to tween
 * AudioMixer
