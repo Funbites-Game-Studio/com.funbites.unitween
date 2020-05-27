@@ -1,0 +1,21 @@
+{
+  "name": "com.funbites.unitween",
+  "version": "0.0.2",
+  "displayName": "Funbites UniTween",
+  "description": "UniTween is a Tween framework for Unity that enables programmers and artists to create almost any kind of Tween in a workflow that is easy to learn, fun to use, and with great maintainability.",
+  "unity": "2019.3",
+  "unityRelease": "3f1",
+  "dependencies": {
+    "com.funbites.unity-utils": "0.0.2"
+  },
+  "keywords": [
+    "tween",
+    "workflow"
+  ],
+  "author": {
+    "name": "Funbites Game Studio",
+    "email": "funbitesgames@gmail.com",
+    "url": "https://www.funbites.com.br"
+  },
+  "type": "library"
+}
