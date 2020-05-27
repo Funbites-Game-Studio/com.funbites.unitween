@@ -68,7 +68,7 @@
             switch (command)
             {
                 case MaterialCommand.Color:
-                    return mat.DOColor(color, duration);
+                    return mat.DOColor(color, duration); //done
                 case MaterialCommand.ColorProperty:
                     return mat.DOColor(color, property, duration);
                 case MaterialCommand.Fade:
@@ -92,7 +92,7 @@
                 case MaterialCommand.Vector:
                     return mat.DOVector(vector4, property, duration);
                 case MaterialCommand.BlendableColor:
-                    return mat.DOBlendableColor(color, duration);
+                    return mat.DOBlendableColor(color, duration); //done
                 case MaterialCommand.BlendableColorProperty:
                     return mat.DOBlendableColor(color, property, duration);
                 default:

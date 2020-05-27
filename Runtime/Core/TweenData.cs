@@ -3,9 +3,7 @@
     using DG.Tweening;
     using Sirenix.OdinInspector;
     using UnityEngine;
-
-    [HelpURL("https://github.com/sampaiodias/UniTween/wiki/TweenData-Documentation")]
-    public class TweenData : ScriptableObject
+    public abstract class TweenData : ScriptableObject
     {
         public float duration = 1;
         public float delay;
@@ -21,19 +19,12 @@
         /// </summary>
         /// <param name="uniTweenTarget">Wrapper that contains a List of the component that this TweenData can tween.</param>
         /// <returns></returns>
-        public virtual Tween GetTween(UniTweenObject.UniTweenTarget uniTweenTarget)
+        public virtual Tween GetTween(UnityEngine.Object target)
         {
             return null;
         }
+        public abstract System.Type RequestedType { get; }
 
-        /// <summary>
-        /// Gets the List of components contained inside the UniTweenTarget
-        /// </summary>
-        /// <param name="uniTweenTarget">Wrapper that contains a List of the component that this TweenData can tween.</param>
-        /// <returns></returns>
-        public object GetComponent(UniTweenObject.UniTweenTarget uniTweenTarget)
-        {
-            return uniTweenTarget.GetType().GetField("components").GetValue(uniTweenTarget);
-        }
+        internal abstract bool ValidateType(System.Type type);
     }
 }

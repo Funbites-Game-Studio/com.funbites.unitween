@@ -1,6 +1,8 @@
 {
     "name": "Funbites.UniTween.Editor",
-    "references": [],
+    "references": [
+        "GUID:0d82c5b970e40a04e83181609e2617ff"
+    ],
     "includePlatforms": [
         "Editor"
     ],
