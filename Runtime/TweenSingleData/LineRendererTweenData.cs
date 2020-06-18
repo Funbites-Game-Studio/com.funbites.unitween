@@ -13,13 +13,13 @@
     public class LineRendererTweenData : TweenData
     {
         [SerializeField]
-        private Color m_startColorA;
+        private Color m_startColorA = Color.white;
         [SerializeField]
-        private Color m_startColorB;
+        private Color m_startColorB = Color.white;
         [SerializeField]
-        private Color m_endColorA;
+        private Color m_endColorA = Color.black;
         [SerializeField]
-        private Color m_endColorB;
+        private Color m_endColorB = Color.black;
 
         public override Type RequestedType {
             get {

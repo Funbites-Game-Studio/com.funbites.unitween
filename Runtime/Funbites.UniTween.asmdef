@@ -1,8 +1,8 @@
 {
     "name": "Funbites.UniTween",
     "references": [
-        "GUID:86fa5b828b1cbd24099e00754a5b5f3c",
-        "GUID:fa7ddc4d723f008409bbeeae3ee50095"
+        "Funbites.UnityUtils.Editor",
+        "DOTween.Modules"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

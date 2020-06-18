@@ -14,7 +14,8 @@
     {
         public enum SpecificType
         {
-            Image_GradientColor
+            Image_GradientColor,
+            Material_GradientColor
 
         }
         [SerializeField]
@@ -29,6 +30,8 @@
                 {
                     case SpecificType.Image_GradientColor:
                         return typeof(Image);
+                    case SpecificType.Material_GradientColor:
+                        return typeof(Material);
                     default:
                         return null;
                 }
@@ -44,6 +47,11 @@
                         var image = (Image)target;
                         return image.DOGradientColor(m_targetValue, duration);
                     }
+                case SpecificType.Material_GradientColor:
+                    {
+                        var material = (Material)target;
+                        return material.DOGradientColor(m_targetValue, duration);
+                    }
                 default:
                         return null;
             }
@@ -55,6 +63,8 @@
             {
                 case SpecificType.Image_GradientColor:
                     return type == typeof(Image);
+                case SpecificType.Material_GradientColor:
+                    return type == typeof(Material);
                 default:
                     return false;
             }
@@ -68,6 +78,13 @@
             newInstance.m_type = SpecificType.Image_GradientColor;
             CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
         }
-    #endif
+        [MenuItem("Assets/Create/Tween Data/Material/Gradient Color")]
+        private static void CreateMaterialGradientColorAsset()
+        {
+            var newInstance = CreateInstance<GradientTweenData>();
+            newInstance.m_type = SpecificType.Material_GradientColor;
+            CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
+        }
+#endif
     }
 }

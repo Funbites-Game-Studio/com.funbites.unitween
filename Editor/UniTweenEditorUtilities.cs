@@ -11,7 +11,7 @@ namespace UniTween.Editor
         public static void CreateGameObjectWithSequence()
         {
             GameObject obj = new GameObject();
-            obj.AddComponent<UniTweenSequence>();
+            obj.AddComponent<UniTweenSequencePlayer>();
             obj.name = "Sequence NewSequence";
 
             if (Selection.activeTransform != null)

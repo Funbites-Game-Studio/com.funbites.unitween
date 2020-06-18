@@ -16,7 +16,9 @@
         public enum SpecificType {
             LayoutElement_FlexibleSize,
             LayoutElement_MinSize,
-            LayoutElement_PreferredSize
+            LayoutElement_PreferredSize,
+            Material_Offset,
+            Material_Tiling
         }
         [SerializeField]
         private SpecificType m_type = SpecificType.LayoutElement_FlexibleSize;
@@ -34,6 +36,9 @@
                     case SpecificType.LayoutElement_MinSize:
                     case SpecificType.LayoutElement_PreferredSize:
                         return typeof(LayoutElement);
+                    case SpecificType.Material_Offset:
+                    case SpecificType.Material_Tiling:
+                        return typeof(Material);
                     default:
                         return null;
                 }
@@ -60,6 +65,18 @@
                         result = layoutElement.DOPreferredSize(m_targetValue, duration);
                         break;
                     }
+                case SpecificType.Material_Offset:
+                    {
+                        var material = (Material)target;
+                        result = material.DOOffset(m_targetValue, duration);
+                        break;
+                    }
+                case SpecificType.Material_Tiling:
+                    {
+                        var material = (Material)target;
+                        result = material.DOOffset(m_targetValue, duration);
+                        break;
+                    }
                 default:
                     result = null;
                     break;
@@ -76,6 +93,9 @@
                 case SpecificType.LayoutElement_MinSize:
                 case SpecificType.LayoutElement_PreferredSize:
                     return type == typeof(LayoutElement);
+                case SpecificType.Material_Offset:
+                case SpecificType.Material_Tiling:
+                    return type == typeof(Material);
                 default:
                     return false;
             }
@@ -101,6 +121,22 @@
         {
             var newInstance = CreateInstance<Vector2TweenData>();
             newInstance.m_type = SpecificType.LayoutElement_PreferredSize;
+            CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
+        }
+
+        [MenuItem("Assets/Create/Tween Data/Material/Offset")]
+        private static void CreateMaterialOffsetAsset()
+        {
+            var newInstance = CreateInstance<Vector2TweenData>();
+            newInstance.m_type = SpecificType.Material_Offset;
+            CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
+        }
+
+        [MenuItem("Assets/Create/Tween Data/Material/Tiling")]
+        private static void CreateMaterialTilingAsset()
+        {
+            var newInstance = CreateInstance<Vector2TweenData>();
+            newInstance.m_type = SpecificType.Material_Tiling;
             CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
         }
 #endif

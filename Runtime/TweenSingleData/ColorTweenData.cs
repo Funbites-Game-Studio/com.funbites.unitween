@@ -26,7 +26,8 @@
             Material_Color,
             Material_BlendableColor,
             Renderer_Color,
-            Renderer_BlendableColor
+            Renderer_BlendableColor,
+            Outline_Color
         }
         [SerializeField]
         private SpecificType m_type = SpecificType.Camera_Color;
@@ -58,6 +59,8 @@
                     case SpecificType.Renderer_Color:
                     case SpecificType.Renderer_BlendableColor:
                         return typeof(Renderer);
+                    case SpecificType.Outline_Color:
+                        return typeof(Outline);
                     default:
                         return null;
                 }
@@ -128,6 +131,12 @@
                         var renderer = (Renderer)target;
                         return renderer.material.DOBlendableColor(m_targetValue, duration);
                     }
+                case SpecificType.Outline_Color:
+                    {
+                        var outline = (Outline)target;
+                        result = outline.DOColor(m_targetValue, duration);
+                        break;
+                    }
                 default:
                     result = null;
                     break;
@@ -159,6 +168,8 @@
                 case SpecificType.Renderer_Color:
                 case SpecificType.Renderer_BlendableColor:
                     return type == typeof(MeshRenderer) || type == typeof(SpriteRenderer);
+                case SpecificType.Outline_Color:
+                    return type == typeof(Outline);
                 default:
                     return false;
             }
@@ -240,6 +251,14 @@
         {
             var newInstance = CreateInstance<ColorTweenData>();
             newInstance.m_type = SpecificType.Renderer_BlendableColor;
+            CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
+        }
+
+        [MenuItem("Assets/Create/Tween Data/Outline/Color")]
+        private static void CreateOutlineColorAsset()
+        {
+            var newInstance = CreateInstance<ColorTweenData>();
+            newInstance.m_type = SpecificType.Outline_Color;
             CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
         }
 #endif

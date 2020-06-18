@@ -2,12 +2,9 @@
 {
     using Sirenix.OdinInspector;
     using System.Collections.Generic;
-    using UniTween.Data;
     using UnityEngine;
-    using UnityEngine.Audio;
     using UnityEngine.Events;
-    using UnityEngine.UI;
-
+    [System.Serializable]
     public class UniTweenObject
     {
         [OnValueChanged("NewOperation")]
@@ -29,10 +26,13 @@
         [ShowIf("ShowTarget")]
         [HideLabel]
         [SerializeField]
+        [OnValueChanged("OnTargetChange")]
         [ValidateInput("ValidateTarget", "Type of target must correspond to the Tween.", InfoMessageType.Error)]
+        [HorizontalGroup("Target")]
         public UnityEngine.Object target;
+        
 
-        private string tweenDataCurrentType;
+        //private string tweenDataCurrentType;
 
         /// <summary>
         /// Calculates and returns a new interval based on the default interval plus its defined variance.
@@ -48,14 +48,36 @@
             if (target == null || tweenData == null) return true;
             return tweenData.ValidateType(target.GetType());
         }
-
+        /*
         private void SetCurrentType()
         {
             if (tweenData != null)
                 tweenDataCurrentType = tweenData.GetType().ToString();
         }
+        */
+
+
 
 #pragma warning disable IDE0051 // Remove unused private member. Note: These are used by Odin Attributes via strings.
+        [Button]
+        [ShowIf("IsTweenOperation")]
+        [HorizontalGroup("Target")]
+        private void UseSelectedGO()
+        {
+            target = UnityEditor.Selection.activeGameObject;
+            OnTargetChange();
+        }
+
+        private void OnTargetChange()
+        {
+            if (!ValidateTarget(target))
+            {
+                if (target is GameObject)
+                {
+                    target = (target as GameObject).GetComponent(tweenData.RequestedType);
+                }
+            }
+        }
 
         private bool ShowTarget()
         {

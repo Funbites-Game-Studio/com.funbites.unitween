@@ -13,7 +13,7 @@ namespace UniTween.Editor
 
     public class UniTweenSequenceExplorer : OdinMenuEditorWindow
     {
-        public static List<UniTweenSequence> sequences = new List<UniTweenSequence>();
+        public static List<UniTweenSequencePlayer> sequences = new List<UniTweenSequencePlayer>();
 
         protected override OdinMenuTree BuildMenuTree()
         {
@@ -27,7 +27,7 @@ namespace UniTween.Editor
 
             for (int i = 0; i < evs.Count; i++)
             {
-                string sqName = evs[i].id != "" ? evs[i].name + ": " + evs[i].id : evs[i].name;
+                string sqName = evs[i].DisplayName != "" ? evs[i].name + ": " + evs[i].DisplayName : evs[i].name;
 
                 if (sqAmount.ContainsKey(sqName))
                 {
@@ -49,9 +49,9 @@ namespace UniTween.Editor
             return tree;
         }
 
-        public List<UniTweenSequence> GetSequences()
+        public List<UniTweenSequencePlayer> GetSequences()
         {
-            var evs = CustomFindObjectsOfTypeAll<UniTweenSequence>();
+            var evs = CustomFindObjectsOfTypeAll<UniTweenSequencePlayer>();
 
             sequences.Clear();
             for (int i = 0; i < evs.Count; i++)
@@ -79,7 +79,7 @@ namespace UniTween.Editor
                     {
                         if (SirenixEditorGUI.ToolbarButton(new GUIContent("Select GameObject")))
                         {
-                            Selection.activeGameObject = (((UniTweenSequence)selected.Value).gameObject);
+                            Selection.activeGameObject = (((UniTweenSequencePlayer)selected.Value).gameObject);
                             EditorGUIUtility.PingObject(Selection.activeGameObject);
                         }
                     }
@@ -110,10 +110,10 @@ namespace UniTween.Editor
 
         protected override void DrawEditor(int index)
         {
-            UniTweenSequence obj = (UniTweenSequence)CurrentDrawingTargets[index];
+            UniTweenSequencePlayer obj = (UniTweenSequencePlayer)CurrentDrawingTargets[index];
             if (obj != null)
             {
-                SirenixEditorGUI.BeginBox(obj.gameObject.name + ": " + obj.id);
+                SirenixEditorGUI.BeginBox($"{obj.gameObject.name} : {obj.DisplayName}");
                 {
                     base.DrawEditor(index);
                 }

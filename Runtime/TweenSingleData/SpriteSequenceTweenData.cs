@@ -1,16 +1,15 @@
-﻿using Sirenix.OdinInspector;
-using System;
-using UnityEngine;
-using UniTween.Core;
-using DG.Tweening;
-using UnityEngine.UI;
+﻿namespace UniTweens.SpriteAnimation {
+    using Sirenix.OdinInspector;
+    using System;
+    using UnityEngine;
+    using UniTween.Core;
+    using DG.Tweening;
 #if UNITY_EDITOR
-using UnityEditor;
+    using UnityEditor;
 #endif
 
-namespace UniTweens.SpriteAnimation {
     [CreateAssetMenu(menuName ="Tween Data/Sprite Animation/Sprite Sequence")]
-    public class SpriteSequence : TweenData {
+    public class SpriteSequenceTweenData : TweenData {
         [InfoBox("Duration and CustomEase/Curve are set automatically based on Frames. Please, don't change it.", InfoMessageType.Warning)]
         public enum SpecificType {
             Image_Sprite,
@@ -44,7 +43,7 @@ namespace UniTweens.SpriteAnimation {
             get {
                 switch (m_type) {
                     case SpecificType.Image_Sprite:
-                        return typeof(Image);
+                        return typeof(ImageSpriteAnimation);
                     case SpecificType.SpriteRenderer_Sprite:
                         throw new NotImplementedException("Not implemented");
                     default:

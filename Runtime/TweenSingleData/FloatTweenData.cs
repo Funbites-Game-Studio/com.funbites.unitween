@@ -25,7 +25,10 @@ namespace UniTween.Tweens {
             AudioSource_Pitch,
             Graphic_Fade,
             Light_Intensity,
-            Light_ShadowStrength
+            Light_ShadowStrength,
+            Material_Fade,
+            Outline_Fade,
+            RectTransform_AnchorPosY
         }
         [SerializeField]
         private SpecificType m_type = SpecificType.Image_Fade;
@@ -59,6 +62,10 @@ namespace UniTween.Tweens {
                     case SpecificType.Light_Intensity:
                     case SpecificType.Light_ShadowStrength:
                         return typeof(Light);
+                    case SpecificType.Material_Fade:
+                        return typeof(Material);
+                    case SpecificType.Outline_Fade:
+                        return typeof(Outline);
                     default:
                         return null;
                 }
@@ -143,6 +150,16 @@ namespace UniTween.Tweens {
                         var light = (Light)target;
                         return light.DOShadowStrength(m_targetValue, duration);
                     }
+                case SpecificType.Material_Fade:
+                    {
+                        var material = (Material)target;
+                        return material.DOFade(m_targetValue, duration);
+                    }
+                case SpecificType.Outline_Fade:
+                    {
+                        var outline = (Outline)target;
+                        return outline.DOFade(m_targetValue, duration);
+                    }
                 default:
                     result = null;
                     break;
@@ -174,6 +191,10 @@ namespace UniTween.Tweens {
                 case SpecificType.Light_Intensity:
                 case SpecificType.Light_ShadowStrength:
                     return type == typeof(Light);
+                case SpecificType.Material_Fade:
+                    return type == typeof(Material);
+                case SpecificType.Outline_Fade:
+                    return type == typeof(Outline);
                 default:
                     return false;
             }
@@ -274,6 +295,22 @@ namespace UniTween.Tweens {
         {
             var newInstance = CreateInstance<FloatTweenData>();
             newInstance.m_type = SpecificType.Light_ShadowStrength;
+            CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
+        }
+
+        [MenuItem("Assets/Create/Tween Data/Material/Fade")]
+        private static void CreateMaterialFadeAsset()
+        {
+            var newInstance = CreateInstance<FloatTweenData>();
+            newInstance.m_type = SpecificType.Material_Fade;
+            CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
+        }
+
+        [MenuItem("Assets/Create/Tween Data/Outline/Fade")]
+        private static void CreateOutlineFadeAsset()
+        {
+            var newInstance = CreateInstance<FloatTweenData>();
+            newInstance.m_type = SpecificType.Outline_Fade;
             CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
         }
 #endif
