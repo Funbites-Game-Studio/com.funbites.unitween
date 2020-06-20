@@ -6,7 +6,13 @@ namespace UniTween.Core {
     public class UniTweenSequencePlayer : MonoBehaviour, IUniTweenSequencePlayer {
         [SerializeField]
         private UniTweenSequence m_tweenSequence = null;
-        public UniTweenSequence TweenSequence => m_tweenSequence;
+        public UniTweenSequence TweenSequence {
+            get {
+                if (!m_tweenSequence.HasInitialized)
+                    InitializeSequence(); 
+                return m_tweenSequence;
+            }
+        }
         [FoldoutGroup("Settings", true)]
         public bool playOnStart;
         [FoldoutGroup("Settings", true)]
@@ -32,7 +38,13 @@ namespace UniTween.Core {
         public float timeScale = 1;
 
         private void Awake() {
-            m_tweenSequence.Initialize(this, "seq",loops, loopType, timeScale);
+            if (!m_tweenSequence.HasInitialized)
+                InitializeSequence();
+        }
+
+        private void InitializeSequence()
+        {
+            m_tweenSequence.Initialize(this, "seq", loops, loopType, timeScale);
         }
 
         public void Kill() {

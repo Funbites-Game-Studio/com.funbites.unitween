@@ -22,7 +22,11 @@ namespace UniTween.Core
         public List<UniTweenObject> uniTweens = new List<UniTweenObject>();
         [HideInInspector]
         public Sequence SequenceInstance { get; private set; }
+        [ToggleLeft]
+        [InfoBox("This Sequence is disabled, it will not be played if you call it.", InfoMessageType = InfoMessageType.Warning, VisibleIf  = "Disabled")]
         public bool Enabled = true;
+
+        public bool Disabled => !Enabled;
         public bool IsPlaying => SequenceInstance.IsPlaying();
 
         public int ElementsCount => uniTweens.Count;
@@ -122,7 +126,7 @@ namespace UniTween.Core
         /// Resumes the playing Sequence, playing it where it was paused. 
         /// Only works if the Sequence was initialized before (using Play() or PlayBackwards()).
         /// </summary>
-        [ShowIf("IsApplicationPlaying")]
+        [ShowIf("CanShowResumeButton")]
         [ButtonGroup("Player")]
         [PropertyOrder(-1)]
         [Button(ButtonSizes.Medium)]
@@ -134,7 +138,7 @@ namespace UniTween.Core
         /// <summary>
         /// Pauses the Sequence.
         /// </summary>
-        [ShowIf("IsApplicationPlaying")]
+        [ShowIf("CanShowPauseButton")]
         [ButtonGroup("Player")]
         [PropertyOrder(-1)]
         [Button(ButtonSizes.Medium)]
@@ -203,6 +207,19 @@ namespace UniTween.Core
             }
         }
 #if UNITY_EDITOR
+        private bool CanShowPauseButton()
+        {
+            return Application.isPlaying && SequenceInstance.IsPlaying();
+        }
+
+        private bool CanShowResumeButton()
+        {
+            if (!Application.isPlaying) return false;
+            if (SequenceInstance == null) return false;
+            float elapsedPercentage = SequenceInstance.ElapsedPercentage();
+            return !SequenceInstance.IsPlaying() && elapsedPercentage > 0 && elapsedPercentage < 1;
+        }
+
         private bool IsApplicationPlaying()
         {
             return Application.isPlaying;
