@@ -4,6 +4,7 @@ using UniTween.Core;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using DG.Tweening.Core;
+using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 using Funbites.UnityUtils.Editor;
@@ -16,8 +17,8 @@ namespace UniTween.Tweens
         public enum SpecificType
         {
             Camera_PixelRect,
-            Camera_Rect
-
+            Camera_Rect,
+            RawImage_UVRect
         }
         [SerializeField]
         private SpecificType m_type = SpecificType.Camera_PixelRect;
@@ -36,6 +37,8 @@ namespace UniTween.Tweens
                     case SpecificType.Camera_PixelRect:
                     case SpecificType.Camera_Rect:
                         return typeof(Camera);
+                    case SpecificType.RawImage_UVRect:
+                        return typeof(RawImage);
                     default:
                         return null;
                 }
@@ -59,6 +62,12 @@ namespace UniTween.Tweens
                         result = camera.DORect(m_targetValue, duration);
                         break;
                     }
+                case SpecificType.RawImage_UVRect:
+                    {
+                        var rawImage = (RawImage)target;
+                        result = DOTween.To(() => rawImage.uvRect, x => rawImage.uvRect = x, m_targetValue, duration);
+                        break;
+                    }
                 default:
                     result = null;
                     break;
@@ -76,6 +85,8 @@ namespace UniTween.Tweens
             {
                 case SpecificType.Camera_PixelRect:
                     return type == typeof(Camera);
+                case SpecificType.RawImage_UVRect:
+                    return type == typeof(RawImage);
                 default:
                     return false;
             }
@@ -94,6 +105,14 @@ namespace UniTween.Tweens
         {
             var newInstance = CreateInstance<RectTweenData>();
             newInstance.m_type = SpecificType.Camera_Rect;
+            CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
+        }
+
+        [MenuItem("Assets/Create/Tween Data/Canvas/Raw Image/UVRect")]
+        private static void CreateRawImageUVRectAsset()
+        {
+            var newInstance = CreateInstance<RectTweenData>();
+            newInstance.m_type = SpecificType.RawImage_UVRect;
             CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
         }
 #endif

@@ -27,8 +27,7 @@ namespace UniTween.Tweens {
             Light_Intensity,
             Light_ShadowStrength,
             Material_Fade,
-            Outline_Fade,
-            RectTransform_AnchorPosY
+            Outline_Fade
         }
         [SerializeField]
         private SpecificType m_type = SpecificType.Image_Fade;

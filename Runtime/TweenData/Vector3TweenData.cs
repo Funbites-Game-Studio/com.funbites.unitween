@@ -15,7 +15,8 @@ namespace UniTween.Tweens {
     public class Vector3TweenData : TweenData {
         public enum SpecificType {
             Transform_Move,
-            Transform_Rotate
+            Transform_Rotate,
+            Transform_Rotate_Beyond360
         }
         [SerializeField]
         private SpecificType m_type = SpecificType.Transform_Move;
@@ -31,6 +32,7 @@ namespace UniTween.Tweens {
                 switch (m_type) {
                     case SpecificType.Transform_Move:
                     case SpecificType.Transform_Rotate:
+                    case SpecificType.Transform_Rotate_Beyond360:
                         return typeof(Transform);
                     default:
                         return null;
@@ -48,11 +50,12 @@ namespace UniTween.Tweens {
                     }
                 case SpecificType.Transform_Rotate: {
                         Transform transform = (Transform)target;
-                        var rotateResult = transform.DORotate(m_targetValue, duration);
-                        if (m_useFrom) {
-                            rotateResult.From(m_fromValue, false);
-                        }
-                        return rotateResult;
+                        return TweenToQuaternionRotation(transform, RotateMode.Fast);
+                    }
+                case SpecificType.Transform_Rotate_Beyond360:
+                    {
+                        Transform transform = (Transform)target;
+                        return TweenToQuaternionRotation(transform, RotateMode.FastBeyond360);
                     }
                 default:
                     result = null;
@@ -64,10 +67,22 @@ namespace UniTween.Tweens {
             return result;
         }
 
+        private TweenerCore<Quaternion, Vector3, DG.Tweening.Plugins.Options.QuaternionOptions> TweenToQuaternionRotation(Transform transform, RotateMode rotateMode)
+        {
+            var rotateResult = transform.DORotate(m_targetValue, duration, rotateMode);
+            if (m_useFrom)
+            {
+                rotateResult.From(m_fromValue, false);
+            }
+            return rotateResult;
+        }
+
+
         internal override bool ValidateType(Type type) {
             switch (m_type) {
                 case SpecificType.Transform_Move:
                 case SpecificType.Transform_Rotate:
+                case SpecificType.Transform_Rotate_Beyond360:
                     return type == typeof(Transform) || type == typeof(RectTransform);
                 default:
                     return false;

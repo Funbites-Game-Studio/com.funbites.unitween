@@ -11,6 +11,9 @@
         [Tooltip("Choose between one of four operations:\n\nAppend: adds a tween to play when the previous Append operation ends.\n\nAppendInterval: adds an interval (in seconds) between the previous and the next Append operation.\n\nAppendCallback: invokes the methods registered on the callback/UnityEvent when the previous Append operation ends.\n\nJoin: adds a tween to play at the same time of the previous Append operation.")]
         public TweenOperation operation;
         [ShowIf("IsTweenOperation")]
+        [InlineEditor]
+        [HideLabel]
+        [Required]
         //[OnValueChanged("NewTarget")]
         [Tooltip("To create a new TweenData right-click inside of any folder in your project, go to Create/TweenData and choose the kind of TweenData that modifies the component (or MonoBehaviour) you want to tween.")]
         public TweenData tweenData;
@@ -29,6 +32,7 @@
         [OnValueChanged("OnTargetChange")]
         [ValidateInput("ValidateTarget", "Type of target must correspond to the Tween.", InfoMessageType.Error)]
         [HorizontalGroup("Target")]
+        [Required]
         public UnityEngine.Object target;
         
 

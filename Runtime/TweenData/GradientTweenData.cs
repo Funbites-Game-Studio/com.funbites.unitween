@@ -71,7 +71,7 @@
         }
 
     #if UNITY_EDITOR
-        [MenuItem("Assets/Create/Tween Data/Image/Gradient Color")]
+        [MenuItem("Assets/Create/Tween Data/Canvas/Image/Gradient Color")]
         private static void CreateImageGradientColorAsset()
         {
             var newInstance = CreateInstance<GradientTweenData>();
