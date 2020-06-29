@@ -4,10 +4,10 @@
     using System;
     using UniTween.Core;
     using UnityEngine;
+    using UnityEngine.UI;
 #if UNITY_EDITOR
     using UnityEditor;
     using Funbites.UnityUtils.Editor;
-    using UnityEngine.UI;
 #endif
 
     public class GradientTweenData : TweenData

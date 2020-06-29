@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace UniTween.Core {
     public class UniTweenSequencePlayer : MonoBehaviour, IUniTweenSequencePlayer {
-        [SerializeField]
+        [SerializeField, InlineProperty, HideLabel]
         private UniTweenSequence m_tweenSequence = null;
         public UniTweenSequence TweenSequence {
             get {

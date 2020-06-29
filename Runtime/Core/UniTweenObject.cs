@@ -63,6 +63,7 @@
 
 
 #pragma warning disable IDE0051 // Remove unused private member. Note: These are used by Odin Attributes via strings.
+#if UNITY_EDITOR
         [Button]
         [ShowIf("IsTweenOperation")]
         [HorizontalGroup("Target")]
@@ -71,7 +72,7 @@
             target = UnityEditor.Selection.activeGameObject;
             OnTargetChange();
         }
-
+#endif
         private void OnTargetChange()
         {
             if (!ValidateTarget(target))
@@ -141,7 +142,7 @@
             Join
         }
 
-        #region Wrapper
+#region Wrapper
         public abstract class UniTweenTarget
         {
         }
@@ -152,6 +153,6 @@
             [ListDrawerSettings(Expanded = true, AlwaysAddDefaultValue = true)]
             public List<T> components = new List<T>();
         }
-        #endregion
+#endregion
     }
 }
