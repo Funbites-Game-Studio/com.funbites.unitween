@@ -209,7 +209,7 @@ namespace UniTween.Core
 #if UNITY_EDITOR
         private bool CanShowPauseButton()
         {
-            return Application.isPlaying && SequenceInstance.IsPlaying();
+            return Application.isPlaying && SequenceInstance != null && SequenceInstance.IsPlaying();
         }
 
         private bool CanShowResumeButton()
