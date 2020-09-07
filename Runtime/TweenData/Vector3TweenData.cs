@@ -16,7 +16,8 @@ namespace UniTween.Tweens {
         public enum SpecificType {
             Transform_Move,
             Transform_Rotate,
-            Transform_Rotate_Beyond360
+            Transform_Rotate_Beyond360,
+            Transform_Scale
         }
         [SerializeField]
         private SpecificType m_type = SpecificType.Transform_Move;
@@ -33,6 +34,7 @@ namespace UniTween.Tweens {
                     case SpecificType.Transform_Move:
                     case SpecificType.Transform_Rotate:
                     case SpecificType.Transform_Rotate_Beyond360:
+                    case SpecificType.Transform_Scale:
                         return typeof(Transform);
                     default:
                         return null;
@@ -56,6 +58,12 @@ namespace UniTween.Tweens {
                     {
                         Transform transform = (Transform)target;
                         return TweenToQuaternionRotation(transform, RotateMode.FastBeyond360);
+                    }
+                case SpecificType.Transform_Scale:
+                    {
+                        Transform transform = (Transform)target;
+                        result = transform.DOScale(m_targetValue, duration);
+                        break;
                     }
                 default:
                     result = null;
@@ -83,6 +91,7 @@ namespace UniTween.Tweens {
                 case SpecificType.Transform_Move:
                 case SpecificType.Transform_Rotate:
                 case SpecificType.Transform_Rotate_Beyond360:
+                case SpecificType.Transform_Scale:
                     return type == typeof(Transform) || type == typeof(RectTransform);
                 default:
                     return false;
@@ -101,6 +110,14 @@ namespace UniTween.Tweens {
         private static void CreateTransformRotateAsset() {
             var newInstance = CreateInstance<Vector3TweenData>();
             newInstance.m_type = SpecificType.Transform_Rotate;
+            CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
+        }
+
+        [MenuItem("Assets/Create/Tween Data/Transform/Scale")]
+        private static void CreateTransformScaleAsset()
+        {
+            var newInstance = CreateInstance<Vector3TweenData>();
+            newInstance.m_type = SpecificType.Transform_Scale;
             CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
         }
 #endif
