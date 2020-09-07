@@ -21,11 +21,15 @@
         public class Frame {
             [SerializeField]
             private float m_duration = 1;
-            [SerializeField, Required]
+            [SerializeField, ToggleLeft]
+            private bool m_isEmpty = false;
+
+            [SerializeField, Required, HideIf("m_isEmpty")]
             private Sprite m_sprite = null;
             
             public Sprite Sprite => m_sprite;
             public float Duration => m_duration;
+            public bool IsEmpty => m_isEmpty;
         }
         [SerializeField, OnValueChanged("OnEditFrames", true)]
         private Frame[] m_frames = null;
@@ -57,7 +61,15 @@
                         ImageSpriteAnimation imageSpriteAnimator = (ImageSpriteAnimation)target;
                         Tween t = DOTween.To(() => imageSpriteAnimator.IndexAcc, x => {
                             imageSpriteAnimator.IndexAcc = x;
-                            imageSpriteAnimator.Sprite = m_frames[Mathf.CeilToInt(x)].Sprite;
+                            var frame = m_frames[Mathf.CeilToInt(x)];
+                            if (frame.IsEmpty)
+                            {
+                                imageSpriteAnimator.gameObject.SetActive(false);
+                            } else
+                            {
+                                imageSpriteAnimator.gameObject.SetActive(true);
+                                imageSpriteAnimator.Sprite = frame.Sprite;
+                            }
                         }, Length, duration).From(0f,false);
                         return t;
                     }

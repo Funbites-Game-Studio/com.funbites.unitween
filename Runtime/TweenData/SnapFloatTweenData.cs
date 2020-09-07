@@ -73,6 +73,21 @@ namespace UniTween.Tweens {
         }
 
 #if UNITY_EDITOR
+        [Button]
+        private void BuildCustomEaseFromTimeAndPosList(Vector2[] timeAndPos)
+        {
+            customEase = true;
+            AnimationCurve newCurve = new AnimationCurve();
+            m_useFrom = true;
+            m_fromValue = timeAndPos[0].y;
+            m_targetValue = timeAndPos[timeAndPos.Length - 1].y;
+            foreach (var val in timeAndPos)
+            {
+                newCurve.AddKey(new Keyframe(val.x, Mathf.InverseLerp(m_fromValue, m_targetValue, val.y)));
+            }
+            curve = newCurve;
+        }
+
         [MenuItem("Assets/Create/Tween Data/Canvas/RectTransform/Anchor Pos X")]
         private static void CreateRectTransformAnchorPosXAsset()
         {

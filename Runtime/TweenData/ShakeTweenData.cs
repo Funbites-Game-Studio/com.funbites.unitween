@@ -78,14 +78,14 @@
         }
 
 #if UNITY_EDITOR
-        [MenuItem("Assets/Create/Tween Data/Canvas/Rect Transform/Shake Anchored Position")]
+        [MenuItem("Assets/Create/Tween Data/Canvas/RectTransform/Shake Anchored Position")]
         private static void CreateRectTransformShakeAnchoredPositionSpriteAsset() {
             var newInstance = CreateInstance<ShakeTweenData>();
             newInstance.m_type = SpecificType.RectTransform_AnchoredPosition;
             CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
         }
 
-        [MenuItem("Assets/Create/Tween Data/Canvas/Camera/Shake Position")]
+        [MenuItem("Assets/Create/Tween Data/Camera/Shake Position")]
         private static void CreateShakeCameraPositionAsset()
         {
             var newInstance = CreateInstance<ShakeTweenData>();
@@ -93,7 +93,7 @@
             CustomCreateAsset.CreateScriptableAssetInCurrentSelection(newInstance, newInstance.m_type.ToString());
         }
 
-        [MenuItem("Assets/Create/Tween Data/Canvas/Rect Transform/Shake Anchored Position")]
+        [MenuItem("Assets/Create/Tween Data/Camera/Shake Rotation")]
         private static void CreateShakeCameraRotationAsset()
         {
             var newInstance = CreateInstance<ShakeTweenData>();
