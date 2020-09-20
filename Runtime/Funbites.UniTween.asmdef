@@ -2,7 +2,9 @@
     "name": "Funbites.UniTween",
     "references": [
         "Funbites.UnityUtils.Editor",
-        "DOTween.Modules"
+        "DOTween.Modules",
+        "Unity.TextMeshPro",
+        "Funbites.UnityUtils"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

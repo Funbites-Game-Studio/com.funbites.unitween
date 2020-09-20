@@ -10,7 +10,7 @@
         [OnValueChanged("NewOperation")]
         [Tooltip("Choose between one of four operations:\n\nAppend: adds a tween to play when the previous Append operation ends.\n\nAppendInterval: adds an interval (in seconds) between the previous and the next Append operation.\n\nAppendCallback: invokes the methods registered on the callback/UnityEvent when the previous Append operation ends.\n\nJoin: adds a tween to play at the same time of the previous Append operation.")]
         public TweenOperation operation;
-        [ShowIf("IsTweenOperation")]
+        [ShowIf(nameof(IsTweenOperation))]
         [InlineEditor]
         [HideLabel]
         [Required]
