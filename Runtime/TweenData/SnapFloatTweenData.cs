@@ -45,12 +45,22 @@ namespace UniTween.Tweens {
                 case SpecificType.RectTransform_AnchorPosX:
                     {
                         var rectTransform = (RectTransform)target;
-                        return rectTransform.DOAnchorPosX(m_targetValue, duration, m_snapping);
+                        var newResult = rectTransform.DOAnchorPosX(m_targetValue, duration, m_snapping);
+                        if (m_useFrom)
+                        {
+                            newResult.From(new Vector2(m_fromValue, rectTransform.anchoredPosition.y));
+                        }
+                        return newResult;
                     }
                 case SpecificType.RectTransform_AnchorPosY:
                     {
                         var rectTransform = (RectTransform)target;
-                        return rectTransform.DOAnchorPosY(m_targetValue, duration, m_snapping);
+                        var newResult = rectTransform.DOAnchorPosY(m_targetValue, duration, m_snapping);
+                        if (m_useFrom)
+                        {
+                            newResult.From(new Vector2(rectTransform.anchoredPosition.x, m_fromValue));
+                        }
+                        return newResult;
                     }
                 default:
                     result = null;

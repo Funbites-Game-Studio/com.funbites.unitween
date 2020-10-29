@@ -9,11 +9,10 @@
     using UnityEngine.UI;
     using TMPro;
     using UniTween.DOTweenModules;
+    using Funbites.UnityUtils;
 #if UNITY_EDITOR
     using UnityEditor;
     using Funbites.UnityUtils.Editor;
-    using System.Text;
-    using Funbites.UnityUtils;
 #endif
 
     public class IntegerTweenData : TweenData
@@ -45,6 +44,8 @@
             }
         }
 
+        private static Func<int, string> formatMinutesToClockFunc = new Func<int, string>(StringUtils.FormatMinutesToClockTime);
+
         public override Tween GetTween(UnityEngine.Object target)
         {
             TweenerCore<int, int, DG.Tweening.Plugins.Options.NoOptions> result;
@@ -53,12 +54,12 @@
                 case SpecificType.TMP_Text_TimeFormat:
                     {
                         var text = (TMP_Text)target;
-                        return text.DOFormatNumericToString(m_fromValue, m_targetValue, duration, StringUtils.FormatMinutesToClockTime);
+                        return text.DOFormatNumericToString(m_fromValue, m_targetValue, duration, formatMinutesToClockFunc);
                     }
                 case SpecificType.Text_TimeFormat:
                     {
                         var text = (Text)target;
-                        return text.DOFormatNumericToString(m_fromValue, m_targetValue, duration, StringUtils.FormatMinutesToClockTime);
+                        return text.DOFormatNumericToString(m_fromValue, m_targetValue, duration, formatMinutesToClockFunc);
                     }
 
                 default:
