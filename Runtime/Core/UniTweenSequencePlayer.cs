@@ -60,7 +60,7 @@ namespace UniTween.Core {
         }
 
         public void Play() {
-            if (m_tweenSequence.IsPlaying) {
+            if (TweenSequence.IsPlaying) {
                 m_tweenSequence.Rewind();
             }
             m_tweenSequence.Play();
