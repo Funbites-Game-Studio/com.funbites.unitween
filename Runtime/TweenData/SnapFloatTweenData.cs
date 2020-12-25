@@ -48,7 +48,7 @@ namespace UniTween.Tweens {
                         var newResult = rectTransform.DOAnchorPosX(m_targetValue, duration, m_snapping);
                         if (m_useFrom)
                         {
-                            newResult.From(new Vector2(m_fromValue, rectTransform.anchoredPosition.y));
+                            newResult.From(new Vector2(m_fromValue, rectTransform.anchoredPosition.y), false);
                         }
                         return newResult;
                     }
@@ -58,7 +58,7 @@ namespace UniTween.Tweens {
                         var newResult = rectTransform.DOAnchorPosY(m_targetValue, duration, m_snapping);
                         if (m_useFrom)
                         {
-                            newResult.From(new Vector2(rectTransform.anchoredPosition.x, m_fromValue));
+                            newResult.From(new Vector2(rectTransform.anchoredPosition.x, m_fromValue), false);
                         }
                         return newResult;
                     }
